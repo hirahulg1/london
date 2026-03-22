@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>London & Paris Family Visit</title>
+  <style>
+    :root {
+      --bg: #fff9f7;
+      --bg-soft: #fff3ef;
+      --paper: rgba(255,255,255,0.82);
+      --card: rgba(255,255,255,0.74);
+      --card-strong: rgba(255,255,255,0.90);
+      --text: #30414f;
+      --muted: #687887;
+      --line: rgba(110, 135, 150, 0.20);
+      --rose: #f4c7c3;
+      --peach: #f8d8bf;
+      --butter: #f6e9b8;
+      --sage: #d7e5d5;
+      --sky: #d9ebf6;
+      --lavender: #e5def8;
+      --accent: #d98579;
+      --accent-deep: #b96f65;
+      --shadow: 0 18px 55px rgba(90, 72, 62, 0.10);
+      --radius-xl: 30px;
+      --radius-lg: 24px;
+      --radius-md: 18px;
+      --max: 1220px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      line-height: 1.6;
+      background:
+        radial-gradient(circle at 10% 5%, rgba(244,199,195,0.40), transparent 18%),
+        radial-gradient(circle at 90% 8%, rgba(217,235,246,0.48), transparent 20%),
+        radial-gradient(circle at 50% 100%, rgba(215,229,213,0.42), transparent 18%),
+        linear-gradient(180deg, #fffaf8 0%, #fff6f2 52%, #fffaf7 100%);
+    }
+
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    .shell { width: min(var(--max), calc(100% - 28px)); margin: 0 auto; }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(18px);
+      background: rgba(255, 250, 247, 0.72);
+      border-bottom: 1px solid rgba(110,135,150,0.10);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 0;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: #2d3d4b;
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--rose), var(--peach));
+      box-shadow: var(--shadow);
+      font-size: 1.1rem;
+    }
+
+    .navlinks {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .navlinks a {
+      padding: 10px 12px;
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: 0.95rem;
+      transition: .2s ease;
+    }
+
+    .navlinks a:hover,
+    .navlinks a:focus-visible {
+      background: rgba(255,255,255,0.72);
+      color: var(--text);
+      outline: none;
+    }
+
+    .hero {
+      padding: 34px 0 22px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      gap: 22px;
+      align-items: stretch;
+    }
+
+    .panel {
+      background: var(--paper);
+      border: 1px solid rgba(255,255,255,0.72);
+      box-shadow: var(--shadow);
+      border-radius: var(--radius-xl);
+    }
+
+    .hero-copy {
+      padding: 34px;
+      position: relative;
+      overflow: hidden;
+      min-height: 520px;
+      background:
+        radial-gradient(circle at top right, rgba(244,199,195,0.30), transparent 26%),
+        radial-gradient(circle at bottom left, rgba(217,235,246,0.34), transparent 24%),
+        linear-gradient(180deg, rgba(255,255,255,0.90), rgba(255,255,255,0.76));
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 13px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.78);
+      border: 1px solid rgba(110,135,150,0.14);
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: #7b5a57;
+    }
+
+    h1 {
+      margin: 18px 0 14px;
+      font-size: clamp(2.5rem, 5.6vw, 5rem);
+      line-height: .94;
+      letter-spacing: -0.06em;
+      max-width: 10.5ch;
+      color: #263744;
+    }
+
+    .lead {
+      color: var(--muted);
+      font-size: 1.08rem;
+      max-width: 58ch;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 13px 16px;
+      border-radius: 999px;
+      font-weight: 700;
+      transition: .2s ease;
+      border: 1px solid rgba(110,135,150,0.16);
+      background: rgba(255,255,255,0.78);
+      color: var(--text);
+    }
+
+    .btn:hover,
+    .btn:focus-visible {
+      transform: translateY(-1px);
+      outline: none;
+      background: rgba(255,255,255,0.95);
+    }
+
+    .btn.primary {
+      background: linear-gradient(135deg, #efb5ae, #f6d2b8);
+      border-color: transparent;
+      color: #5f3f3b;
+    }
+
+    .hero-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 26px;
+    }
+
+    .metric {
+      padding: 16px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.70);
+      border: 1px solid rgba(110,135,150,0.12);
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 1.15rem;
+      margin-bottom: 4px;
+      color: #30414f;
+    }
+
+    .muted { color: var(--muted); }
+
+    .hero-visual {
+      display: grid;
+      grid-template-rows: 1fr auto;
+      gap: 18px;
+      min-height: 520px;
+    }
+
+    .cover {
+      position: relative;
+      overflow: hidden;
+      min-height: 360px;
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow);
+      background:
+        linear-gradient(180deg, rgba(37,52,61,0.10), rgba(37,52,61,0.50)),
+        url('https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat;
+    }
+
+    .cover-card {
+      position: absolute;
+      left: 24px;
+      right: 24px;
+      bottom: 24px;
+      padding: 18px 20px;
+      border-radius: 22px;
+      background: rgba(255,255,255,0.78);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.70);
+      color: var(--text);
+    }
+
+    .cover-card h3 { margin: 0 0 6px; letter-spacing: -0.03em; }
+    .cover-card p { margin: 0; color: var(--muted); }
+
+    .mini-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .mini {
+      padding: 18px;
+      border-radius: var(--radius-lg);
+      background: rgba(255,255,255,0.82);
+      border: 1px solid rgba(255,255,255,0.76);
+      box-shadow: var(--shadow);
+    }
+
+    .mini h3 { margin: 0 0 8px; letter-spacing: -0.03em; }
+    .mini p { margin: 0; color: var(--muted); }
+
+    .strip {
+      padding: 6px 0 8px;
+    }
+
+    .strip-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .feature {
+      min-height: 270px;
+      border-radius: var(--radius-lg);
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(255,255,255,0.7);
+    }
+
+    .feature::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(34,45,54,0.06), rgba(34,45,54,0.56));
+    }
+
+    .feature .content {
+      position: absolute;
+      left: 22px;
+      right: 22px;
+      bottom: 22px;
+      z-index: 1;
+      background: rgba(255,255,255,0.72);
+      border: 1px solid rgba(255,255,255,0.7);
+      border-radius: 20px;
+      padding: 16px 18px;
+      backdrop-filter: blur(8px);
+    }
+
+    .feature .content h3 { margin: 0 0 6px; letter-spacing: -0.03em; }
+    .feature .content p { margin: 0; color: var(--muted); }
+
+    .bg-greenwich { background: url('https://images.unsplash.com/photo-1529655683826-aba9b3e77383?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat; }
+    .bg-paris { background: url('https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat; }
+    .bg-stonehenge { background: url('https://images.unsplash.com/photo-1543342386-2c1c1b6f8f52?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat; }
+
+    section {
+      padding: 20px 0 8px;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .section-head h2 {
+      margin: 0 0 6px;
+      font-size: clamp(1.6rem, 3vw, 2.5rem);
+      letter-spacing: -0.04em;
+      color: #2d3d4b;
+    }
+
+    .section-head p { margin: 0; color: var(--muted); }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 18px;
+    }
+
+    .card {
+      grid-column: span 4;
+      padding: 22px;
+      border-radius: var(--radius-lg);
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,0.76);
+      box-shadow: var(--shadow);
+      min-height: 250px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card.wide { grid-column: span 6; }
+
+    .day {
+      color: #ac756d;
+      font-weight: 800;
+      font-size: .86rem;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .title-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 6px;
+    }
+
+    .icon {
+      width: 44px;
+      height: 44px;
+      flex: 0 0 auto;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, rgba(244,199,195,0.52), rgba(217,235,246,0.68));
+      font-size: 1.1rem;
+      border: 1px solid rgba(255,255,255,0.65);
+    }
+
+    .card h3,
+    .info-card h3,
+    .footer-card h3 {
+      margin: 0 0 8px;
+      letter-spacing: -0.03em;
+      color: #2f404d;
+    }
+
+    .pills {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin: 12px 0 14px;
+    }
+
+    .pill {
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.74);
+      border: 1px solid rgba(110,135,150,0.10);
+      color: #607182;
+      font-size: .84rem;
+    }
+
+    .bullet-list { margin: 0; padding-left: 18px; }
+    .bullet-list li { margin: 8px 0; color: var(--muted); }
+
+    .link-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+    }
+
+    .link-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.82);
+      border: 1px solid rgba(110,135,150,0.12);
+      font-size: .92rem;
+      font-weight: 700;
+      color: #536473;
+      transition: .2s ease;
+    }
+
+    .link-btn:hover,
+    .link-btn:focus-visible {
+      background: #ffffff;
+      outline: none;
+      transform: translateY(-1px);
+    }
+
+    .image-card {
+      min-height: 250px;
+      color: white;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .image-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(37,52,61,0.06), rgba(37,52,61,0.60));
+    }
+
+    .image-card .inner {
+      position: absolute;
+      left: 22px;
+      right: 22px;
+      bottom: 22px;
+      z-index: 1;
+      background: rgba(255,255,255,0.72);
+      color: var(--text);
+      border-radius: 20px;
+      padding: 16px 18px;
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.72);
+    }
+
+    .image-card .inner p { color: var(--muted); margin: 0; }
+
+    .columns,
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .info-card,
+    .footer-card {
+      padding: 20px;
+      border-radius: var(--radius-lg);
+      background: var(--card-strong);
+      border: 1px solid rgba(255,255,255,0.76);
+      box-shadow: var(--shadow);
+    }
+
+    .info-card p,
+    .footer-card p { color: var(--muted); margin: 0; }
+
+    .accent-link { color: var(--accent-deep); font-weight: 700; }
+
+    footer { padding: 28px 0 46px; }
+    .footer-note { margin-top: 16px; text-align: center; color: #8a98a3; font-size: .92rem; }
+
+    @media (max-width: 1040px) {
+      .hero-grid,
+      .strip-grid,
+      .columns,
+      .footer-grid,
+      .mini-grid { grid-template-columns: 1fr; }
+      .card,
+      .card.wide { grid-column: span 6; }
+      .hero-metrics { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 760px) {
+      .shell { width: min(var(--max), calc(100% - 20px)); }
+      .nav { flex-direction: column; align-items: flex-start; }
+      .navlinks { width: 100%; overflow-x: auto; flex-wrap: nowrap; padding-bottom: 2px; }
+      h1 { font-size: clamp(2.2rem, 13vw, 3.5rem); }
+      .hero-metrics { grid-template-columns: 1fr; }
+      .card,
+      .card.wide { grid-column: 1 / -1; }
+      .hero-copy,
+      .cover,
+      .mini,
+      .feature,
+      .card,
+      .info-card,
+      .footer-card { border-radius: 22px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="shell nav">
+      <a href="#top" class="brand">
+        <span class="brand-mark">✈️</span>
+        <span>London & Paris Visit</span>
+      </a>
+      <div class="navlinks">
+        <a href="#overview">Overview</a>
+        <a href="#week1">Week 1</a>
+        <a href="#week2">Week 2</a>
+        <a href="#paris">Paris</a>
+        <a href="#week3">Week 3</a>
+        <a href="#links">Links</a>
+      </div>
+    </div>
+  </div>
+
+  <main id="top">
+    <section class="hero" id="overview">
+      <div class="shell hero-grid">
+        <div class="panel hero-copy">
+          <span class="eyebrow">Pastel travel microsite · July family plan</span>
+          <h1>London done beautifully, with Paris on the side.</h1>
+          <p class="lead">
+            A more editorial, travel-journal style plan for the visit — softer palette, stronger imagery,
+            easier scanning, and a more polished feel for sharing with family.
+          </p>
+          <div class="actions">
+            <a class="btn primary" href="#week1">Explore the itinerary</a>
+            <a class="btn" href="#links">Open booking links</a>
+          </div>
+          <div class="hero-metrics">
+            <div class="metric">
+              <strong>3 weeks</strong>
+              <span class="muted">London-based with flexible pacing</span>
+            </div>
+            <div class="metric">
+              <strong>2–3 days</strong>
+              <span class="muted">Paris by Eurostar</span>
+            </div>
+            <div class="metric">
+              <strong>Adult + kid friendly</strong>
+              <span class="muted">Iconic sights plus lighter days</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="cover">
+            <div class="cover-card">
+              <h3>Thoughtfully paced and easy to share</h3>
+              <p>Designed to feel less like a note and more like a boutique travel page everyone will actually enjoy using.</p>
+            </div>
+          </div>
+          <div class="mini-grid">
+            <div class="mini">
+              <h3>🪙 Key highlights</h3>
+              <p>Bank of England gold bar, Greenwich, Mudchute Farm, Crossrail Roof Garden, Stonehenge, castles, and Paris.</p>
+            </div>
+            <div class="mini">
+              <h3>🎒 Trip style</h3>
+              <p>Comfortable rhythm, visual appeal, and enough flexibility for family visits, weather, and last-minute choices.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="strip">
+      <div class="shell strip-grid">
+        <div class="feature bg-greenwich">
+          <div class="content">
+            <h3>Greenwich day</h3>
+            <p>Maritime museum, market lunch, observatory views, and one of the prettiest university settings in London.</p>
+          </div>
+        </div>
+        <div class="feature bg-paris">
+          <div class="content">
+            <h3>Paris add-on</h3>
+            <p>Compact, elegant, and high impact — enough for Eiffel, Louvre, central Paris, and a softer final day.</p>
+          </div>
+        </div>
+        <div class="feature bg-stonehenge">
+          <div class="content">
+            <h3>One big excursion</h3>
+            <p>Stonehenge gives the trip a wider England feel without overcomplicating the schedule.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="week1">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <h2>Week 1 · London orientation</h2>
+            <p>Keep the opening few days polished, classic, and easy to enjoy after arrival.</p>
+          </div>
+        </div>
+        <div class="cards">
+          <article class="card">
+            <div class="day">Day 1</div>
+            <div class="title-row"><span class="icon">🌆</span><h3>Arrival + South Bank evening</h3></div>
+            <div class="pills"><span class="pill">Low effort</span><span class="pill">River walk</span><span class="pill">Great first impression</span></div>
+            <ul class="bullet-list">
+              <li>Settle in, refresh, and keep the afternoon easy.</li>
+              <li>Walk Westminster Bridge, the London Eye stretch, and South Bank.</li>
+              <li>Dinner with a river view or somewhere casual nearby.</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <div class="day">Day 2</div>
+            <div class="title-row"><span class="icon">🏛️</span><h3>Westminster walking day</h3></div>
+            <div class="pills"><span class="pill">Classic London</span><span class="pill">Good for first-timers</span></div>
+            <ul class="bullet-list">
+              <li>Westminster, Big Ben, Westminster Abbey, Buckingham Palace area.</li>
+              <li>Optional guided walking tour for easy context and storytelling.</li>
+              <li>Covent Garden later for food, performers, and browsing.</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <div class="day">Day 3</div>
+            <div class="title-row"><span class="icon">👑</span><h3>Tower of London + Tower Bridge</h3></div>
+            <div class="pills"><span class="pill">History</span><span class="pill">Family friendly</span></div>
+            <ul class="bullet-list">
+              <li>Do the Tower of London and allow time for the Beefeater tour.</li>
+              <li>Walk Tower Bridge and the riverside around St Katharine Docks.</li>
+              <li>Optional Sky Garden later if energy allows.</li>
+            </ul>
+          </article>
+
+          <article class="card wide">
+            <div class="day">Days 4–7</div>
+            <div class="title-row"><span class="icon">🧭</span><h3>Museum, quirky London, park time, and family visits</h3></div>
+            <div class="pills"><span class="pill">Flexible</span><span class="pill">Weather backup</span><span class="pill">Easy to swap around</span></div>
+            <ul class="bullet-list">
+              <li>British Museum or Natural History Museum.</li>
+              <li>The Clink Prison Museum or Borough Market for something more unusual.</li>
+              <li>Hyde Park / Kensington Gardens for a slower day.</li>
+              <li>Use one day as a family or catch-up buffer.</li>
+            </ul>
+          </article>
+
+          <article class="card wide image-card" style="background-image:url('https://images.unsplash.com/photo-1517394834181-95ed159986c7?auto=format&fit=crop&w=1200&q=80');">
+            <div class="inner">
+              <div class="day">Week 1 mood</div>
+              <h3>Start strong, but leave headroom</h3>
+              <p>This first week should feel confident and beautiful, not overpacked.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="week2">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <h2>Week 2 · East London, day trips, and standout experiences</h2>
+            <p>This is the more distinctive middle section of the holiday: finance, Greenwich, modern London, Stonehenge, and a castle day.</p>
+          </div>
+        </div>
+        <div class="cards">
+          <article class="card">
+            <div class="day">Day 8</div>
+            <div class="title-row"><span class="icon">🪙</span><h3>Bank of England + City of London</h3></div>
+            <div class="pills"><span class="pill">Unique</span><span class="pill">Gold bar experience</span></div>
+            <ul class="bullet-list">
+              <li>Visit the Bank of England Museum and try the gold bar lift.</li>
+              <li>Walk the City afterwards for the old-meets-modern London contrast.</li>
+              <li>Option to combine with St Paul’s or Leadenhall Market.</li>
+            </ul>
+            <div class="link-row">
+              <a class="link-btn" target="_blank" rel="noreferrer" href="https://www.bankofengland.co.uk/museum">🏦 Bank of England Museum</a>
+            </div>
+          </article>
+
+          <article class="card wide">
+            <div class="day">Day 9</div>
+            <div class="title-row"><span class="icon">⚓</span><h3>Greenwich full day</h3></div>
+            <div class="pills"><span class="pill">Top all-rounder</span><span class="pill">Adult + kid friendly</span><span class="pill">Great scenery</span></div>
+            <ul class="bullet-list">
+              <li>National Maritime Museum.</li>
+              <li>Greenwich Market for lunch.</li>
+              <li>Royal Observatory and the university / Old Royal Naval College area.</li>
+              <li>Optional Thames boat one way for extra fun.</li>
+            </ul>
+            <div class="link-row">
+              <a class="link-btn" target="_blank" rel="noreferrer" href="https://www.rmg.co.uk/national-maritime-museum">🚢 Maritime Museum</a>
+              <a class="link-btn" target="_blank" rel="noreferrer" href="https://www.greenwichmarket.london/">🛍️ Greenwich Market</a>
+              <a class="link-btn" target="_blank" rel="noreferrer" href="https://www.rmg.co.uk/royal-observatory">🔭 Royal Observatory</a>
+              <a class="link-btn" target="_blank" rel="noreferrer" href="https://ornc.org/">🏫 Old Royal Naval College</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="day">Day 10</div>
+            <div class="title-row"><span class="icon">🌿</span><h3>Canary Wharf + Mudchute</h3></div>
+            <div class="pills"><span class="pill">Modern London</span><span class="pill">Easy walking</span></div>
+            <ul class="bullet-list">
+              <li>Crossrail Place Roof Garden / Canary Wharf wander.</li>
+              <li>Coffee and dockside time.</li>
+              <li>Mudchute Farm for a surprising London contrast.</li>
+            </ul>
+            <div class="link-row">
+              <a class="link-btn" target="_blank" rel="noreferrer" href="https://canarywharf.com/places/crossrail-place-roof-garden/">🌴 Roof Garden</a>
+              <a class="link-btn" target="_blank" rel="noreferrer" href="https://www.mudchute.org/">🐑 Mudchute Farm</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="day">Day 11</div>
+            <div class="title-row"><span class="icon">⛳</span><h3>North Greenwich practice golf</h3></div>
+            <div class="pills"><span class="pill">Activity day</span><span class="pill">Low pressure</span></div>
+            <ul class="bullet-list">
+              <li>Driving range or golf practice session.</li>
+              <li>Possible O2 or riverside walk afterwards.</li>
+              <li>Good light day after more intense sightseeing.</li>
+            </ul>
+            <div class="link-row">
+              <a class="link-btn" target="_blank" rel="noreferrer" href="https://www.better.org.uk/leisure-centre/london/greenwich/golf-greenwich-peninsula">🏌️ Greenwich Peninsula Golf</a>
+            </div>
+          </article>
+
+          <article class="card image-card" style="background-image:url('https://images.unsplash.com/photo-1543342386-2c1c1b6f8f52?auto=format&fit=crop&w=1200&q=80');">
+            <div class="inner">
+              <div class="day">Day 12</div>
+              <h3>Stonehenge day</h3>
+              <p>Best done as an early-start day trip, either self-drive or guided, with the option to add Bath.</p>
+              <div class="link-row">
+                <a class="link-btn" target="_blank" rel="noreferrer" href="https://www.english-heritage.org.uk/visit/places/stonehenge/">🗿 Stonehenge tickets</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="day">Day 13</div>
+            <div class="title-row"><span class="icon">🏰</span><h3>Castle day</h3></div>
+            <div class="pills"><span class="pill">Choose one</span><span class="pill">Windsor or Warwick</span></div>
+            <ul class="bullet-list">
+              <li><strong>Windsor Castle:</strong> easier, iconic, royal.</li>
+              <li><strong>Warwick Castle:</strong> more dramatic and theatrical.</li>
+            </ul>
+            <div class="link-row">
+              <a class="link-btn" target="_blank" rel="noreferrer" href="https://www.rct.uk/visit/windsor-castle">👑 Windsor Castle</a>
+              <a class="link-btn" target="_blank" rel="noreferrer" href="https://www.warwick-castle.com/">🛡️ Warwick Castle</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="paris">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <h2>Paris add-on · 2 to 3 days</h2>
+            <p>Compact, elegant, and strong enough to feel special without swallowing the London trip.</p>
+          </div>
+        </div>
+        <div class="cards">
+          <article class="card wide image-card" style="background-image:url('https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1400&q=80'); min-height: 300px;">
+            <div class="inner">
+              <div class="day">Paris overview</div>
+              <h3>A boutique city break within the longer stay</h3>
+              <p>Eiffel Tower, a Seine evening, Louvre highlights, and a softer Montmartre finish if you stay the extra day.</p>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="day">Paris Day 1</div>
+            <div class="title-row"><span class="icon">🗼</span><h3>Arrival + Eiffel Tower + Seine</h3></div>
+            <ul class="bullet-list">
+              <li>Take Eurostar from London.</li>
+              <li>Check in, then Eiffel Tower area and a Seine cruise or river walk.</li>
+            </ul>
+            <div class="link-row">
+              <a class="link-btn" target="_blank" rel="noreferrer" href="https://www.eurostar.com/">🚄 Eurostar</a>
+              <a class="link-btn" target="_blank" rel="noreferrer" href="https://www.toureiffel.paris/en">🗼 Eiffel Tower</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="day">Paris Day 2</div>
+            <div class="title-row"><span class="icon">🎨</span><h3>Louvre + Notre-Dame + central Paris</h3></div>
+            <ul class="bullet-list">
+              <li>Do not try to cover the whole Louvre — choose a focused route.</li>
+              <li>Walk through the central historic area afterwards.</li>
+            </ul>
+            <div class="link-row">
+              <a class="link-btn" target="_blank" rel="noreferrer" href="https://www.louvre.fr/en">🖼️ Louvre</a>
+              <a class="link-btn" target="_blank" rel="noreferrer" href="https://www.notredamedeparis.fr/en/">⛪ Notre-Dame</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="day">Optional Day 3</div>
+            <div class="title-row"><span class="icon">🥐</span><h3>Montmartre + Sacré-Cœur + relaxed return</h3></div>
+            <ul class="bullet-list">
+              <li>A softer, more atmospheric final day.</li>
+              <li>Then return to London without feeling rushed.</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="week3">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <h2>Week 3 · Buffer, family time, and optional overnight trip</h2>
+            <p>Keep the final stretch light so the trip still feels enjoyable at the end.</p>
+          </div>
+        </div>
+        <div class="columns">
+          <article class="info-card">
+            <h3>🛍️ Option A · Stay London-based</h3>
+            <p>Shopping, neighbourhood time, one final museum or market, and room to catch anything missed earlier.</p>
+          </article>
+          <article class="info-card">
+            <h3>🥾 Option B · Short overnight trip</h3>
+            <p>Snowdonia / Eryri makes more sense than Ben Nevis if you want one scenic hike-based add-on from London.</p>
+          </article>
+          <article class="info-card">
+            <h3>☕ Best mindset for final week</h3>
+            <p>Do less, enjoy more, and leave space for family visits, weather changes, and the simple pleasure of London itself.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="links">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <h2>Key booking and planning links</h2>
+            <p>Useful shortcuts for availability, tickets, and planning.</p>
+          </div>
+        </div>
+        <div class="columns">
+          <article class="info-card">
+            <h3>London essentials</h3>
+            <p><a class="accent-link" target="_blank" rel="noreferrer" href="https://www.hrp.org.uk/tower-of-london/">Tower of London</a><br>
+            <a class="accent-link" target="_blank" rel="noreferrer" href="https://www.bankofengland.co.uk/museum">Bank of England Museum</a><br>
+            <a class="accent-link" target="_blank" rel="noreferrer" href="https://www.theclink.co.uk/">The Clink Museum</a></p>
+          </article>
+          <article class="info-card">
+            <h3>Greenwich cluster</h3>
+            <p><a class="accent-link" target="_blank" rel="noreferrer" href="https://www.rmg.co.uk/national-maritime-museum">National Maritime Museum</a><br>
+            <a class="accent-link" target="_blank" rel="noreferrer" href="https://www.rmg.co.uk/royal-observatory">Royal Observatory</a><br>
+            <a class="accent-link" target="_blank" rel="noreferrer" href="https://www.greenwichmarket.london/">Greenwich Market</a></p>
+          </article>
+          <article class="info-card">
+            <h3>Out of London</h3>
+            <p><a class="accent-link" target="_blank" rel="noreferrer" href="https://www.english-heritage.org.uk/visit/places/stonehenge/">Stonehenge</a><br>
+            <a class="accent-link" target="_blank" rel="noreferrer" href="https://www.rct.uk/visit/windsor-castle">Windsor Castle</a><br>
+            <a class="accent-link" target="_blank" rel="noreferrer" href="https://www.eurostar.com/">Eurostar to Paris</a></p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell">
+      <div class="footer-grid">
+        <article class="footer-card">
+          <h3>Editorial travel feel</h3>
+          <p>Reworked to feel more like a boutique destination microsite and less like a plain schedule.</p>
+        </article>
+        <article class="footer-card">
+          <h3>Mobile-friendly sharing</h3>
+          <p>It stays readable on phones so everyone can use it on the move.</p>
+        </article>
+        <article class="footer-card">
+          <h3>Easy to edit later</h3>
+          <p>Still just one HTML file, so dates, maps, restaurants, and links can be refined quickly.</p>
+        </article>
+      </div>
+      <div class="footer-note">Built as a softer, more polished travel microsite for temporary sharing.</div>
+    </div>
+  </footer>
+</body>
+</html>
